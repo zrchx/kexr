@@ -6,10 +6,8 @@ HAHAHAHHA
 @ Patch the config and make tags
 @ List what pactches use
 
-@ Finish to config the Xresources files
+@ Finish to config the Xresources files (HALF OF WORK TO DO)
 @ Push the updates 
-@ Clean the other folder
-@ Make a log about how to patch and in what order
 
 
 ^ Finish edit the st.info
@@ -19,7 +17,8 @@ HAHAHAHHA
 
 ## Patches
 - Xresources (WORKING) *need improve*
-- BoxDraw (NOT)
+- BoxDraw (WORKING) *Wait for more pactches*
+- Glyph Wide (TESTING) * IS the ver with BoxDraw support
 - Alpha (NOT)
 
 
@@ -28,3 +27,7 @@ HAHAHAHHA
 i do not build in this folder clone the folder whitout
 .git and build there make the changes here a build there
 
+
+## LOG
+first patch Xresources and fixes the problem whit background numbers
+then patch BoxDraw and edit config.def.h 
