@@ -7,6 +7,9 @@ VERSION = 0.8.5
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
+LOCALDIR = ~/.local
+PREFIXLOCAL = $(LOCALDIR)/share
+
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
 

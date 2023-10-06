@@ -1,0 +1,50 @@
+! ST Settings !
+st.font:         Ncrx Nerd Font:Regular:pixelsize=13
+st.bold_font:    0
+
+! window padding
+st.borderpx:     15
+st.tabspaces:    2
+st.bellvolume:   0
+st.shell:        /bin/sh
+st.termname:     ns-256color
+
+!- 0.1 to 0.9 = transparency
+!st.alpha:        0.9
+
+! special
+st.foreground:   #495465
+st.background:   #191c24
+st.cursorColor:  #495465
+
+! black
+st.color0:       #393f4c
+st.color8:       #393f4c
+
+! red
+st.color1:       #f13b3b
+st.color9:       #f13b3b
+
+! green
+st.color2:       #52849b
+st.color10:      #52849b
+
+! yellow
+st.color3:       #f55050
+st.color11:      #f55050
+
+! blue
+st.color4:       #f13b3b
+st.color12:      #f13b3b
+
+! magenta
+st.color5:       #306b86
+st.color13:      #306b86
+
+! cyan
+st.color6:       #306b86
+st.color14:      #306b86
+
+! white
+st.color7:       #2a3440
+st.color15:      #2a3440
