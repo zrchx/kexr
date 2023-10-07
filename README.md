@@ -19,6 +19,8 @@ HAHAHAHHA
 - Xresources (WORKING) *need improve*
 - BoxDraw (WORKING) *Wait for more pactches*
 - Glyph Wide (TESTING) * IS the ver with BoxDraw support
+this thing dont work so future testing a implementation require
+
 - Alpha (NOT)
 
 
