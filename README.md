@@ -32,4 +32,7 @@ i do not build in this folder clone the folder whitout
 
 ## LOG
 first patch Xresources and fixes the problem whit background numbers
-then patch BoxDraw and edit config.def.h 
+then patch BoxDraw and edit config.def.h
+
+
+check the compile error and fix it is probably some miss puntation
