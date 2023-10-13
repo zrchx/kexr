@@ -12,38 +12,38 @@ st.blinktimeout: 5
 !st.alpha:        0.9
 
 ! special
-st.foreground:   #495465
+st.foreground:   #475162
 st.background:   #191c24
 st.cursorColor:  #f55050
 
 ! black
-st.color0:       #393f4c
-st.color8:       #393f4c
+st.color0:       #262F3B
+st.color8:       #262F3B
 
 ! red
-st.color1:       #f13b3b
-st.color9:       #f13b3b
+st.color1:       #eb3333
+st.color9:       #eb3333
 
 ! green
-st.color2:       #52849b
-st.color10:      #52849b
+st.color2:       #5D90A8
+st.color10:      #5D90A8
 
 ! yellow
 st.color3:       #f55050
 st.color11:      #f55050
 
 ! blue
-st.color4:       #f13b3b
-st.color12:      #f13b3b
+st.color4:       #eb3333
+st.color12:      #eb3333
 
 ! magenta
-st.color5:       #306b86
-st.color13:      #306b86
+st.color5:       #31799B
+st.color13:      #31799B
 
 ! cyan
-st.color6:       #306b86
-st.color14:      #306b86
+st.color6:       #31799B
+st.color14:      #31799B
 
 ! white
-st.color7:       #2a3440
-st.color15:      #2a3440
+st.color7:       #363F4E
+st.color15:      #363F4E

@@ -3,12 +3,15 @@ VERSION = 0.8.5
 
 # Customize below to fit your system
 
-# paths
+# Paths global
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
+APP = $(PREFIX)/share/applications
 
+# Paths local
 LOCALDIR = ~/.local
 PREFIXLOCAL = $(LOCALDIR)/share
+LOCALAPP = $(LOCALDIR)/share/applications
 
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib

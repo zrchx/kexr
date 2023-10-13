@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Exec=ns
+TryExec=ns
+Icon=Utilities-terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+
+Name=NetSynth
+GenericName=terminal
+Comment=NetSynth a CyberPunk Terminal
+StartupWMClass=ns-256color

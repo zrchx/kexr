@@ -50,7 +50,9 @@ install: ns
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/ns.1
 	mkdir -p $(DESTDIR)$(PREFIX)/share/terminfo
 	tic -o $(DESTDIR)$(PREFIX)/share/terminfo -sx st.info
-	cp Xresources ~/.Xresources
+	mkdir -p $(DESTDIR)$(APP)
+	cp -f ns.desktop $(DESTDIR)$(APP)
+	cp -f Xresources ~/.Xresources
 
 locali: ns
 	mkdir -p $(LOCALDIR)/bin
@@ -61,16 +63,20 @@ locali: ns
 	chmod 644 $(LOCALDIR)/man1/ns.1
 	mkdir -p $(PREFIXLOCAL)/terminfo
 	tic -o $(PREFIXLOCAL)/terminfo -sx st.info
-	cp Xresources ~/.Xresources
+	mkdir -p $(LOCALAPP)
+	cp -f ns.desktop $(LOCALAPP)
+	cp -f Xresources ~/.Xresources
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/ns
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/ns.1
-	rm -f $(DESTDIR)$(PREFIX)/share/terminfo/x/*
+	rm -f $(DESTDIR)$(PREFIX)/share/terminfo
+	rm -f $(DESTDIR)$(APP)
 
 localu:
-	rm -rf $(LOCALDIR)/bin
-	rm -rf $(LOCALDIR)/man1
-	rm -rf $(PREFIXLOCAL)/terminfo
+	rm -f $(LOCALDIR)/bin
+	rm -f $(LOCALDIR)/man1
+	rm -f $(PREFIXLOCAL)/terminfo
+	rm -f $(LOCALAPP)
 
 .PHONY: all options clean dist install uninstall
