@@ -1,13 +1,12 @@
-! ST Settings !
+! NetSynth Settings !
 st.font:         Ncrx Nerd Font:Regular:pixelsize=13
-st.bold_font:    0
+st.bold_font:    Ncrx:Bold:pixelsize=13
 
 ! window padding
 st.borderpx:     15
 st.tabspaces:    2
-st.bellvolume:   0
-st.shell:        /bin/sh
-st.termname:     ns-256color
+st.blinktimeout: 5
+
 
 !- 0.1 to 0.9 = transparency
 !st.alpha:        0.9
@@ -15,7 +14,7 @@ st.termname:     ns-256color
 ! special
 st.foreground:   #495465
 st.background:   #191c24
-st.cursorColor:  #495465
+st.cursorColor:  #f55050
 
 ! black
 st.color0:       #393f4c

@@ -1,11 +1,9 @@
-/* See LICENSE file for copyright and license details. */
+/* NetSynth Settings*/
 
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+/* Font */
+static char *font = "Ncrx:pixelsize=13:antialias=true:autohint=true";
+/* Misc */
+static int bellvolume = 0;
 static int borderpx = 0;
 
 /*
@@ -18,6 +16,9 @@ static int borderpx = 0;
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
+
+
+
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
@@ -60,7 +61,7 @@ static double maxlatency = 33;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+unsigned int blinktimeout = 800;
 
 /*
  * thickness of underline and bar cursors
@@ -77,13 +78,8 @@ const int boxdraw = 1;
 const int boxdraw_bold = 0;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 1;
+const int boxdraw_braille = 0;
 
-/*
- * bell volume. It must be a value between -100 and 100. Use 0 for disabling
- * it
- */
-static int bellvolume = 0;
 
 /* default TERM value */
 char *termname = "ns-256color";
@@ -107,53 +103,65 @@ unsigned int tabspaces = 2;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+  /* 8 normal colors */
+  [0] = "#393f4c", /* black   */
+  [1] = "#f13b3b", /* red     */
+  [2] = "#52849b", /* green   */
+  [3] = "#f55050", /* yellow  */
+  [4] = "#f13b3b", /* blue    */
+  [5] = "#306b86", /* magenta */
+  [6] = "#306b86", /* cyan    */
+  [7] = "#2a3440", /* white   */
 
-	[255] = 0,
+  /* 8 bright colors */
+  [8]  = "#393f4c", /* black   */
+  [9]  = "#f13b3b", /* red     */
+  [10] = "#52849b", /* green   */
+  [11] = "#f55050", /* yellow  */
+  [12] = "#f13b3b", /* blue    */
+  [13] = "#306b86", /* magenta */
+  [14] = "#306b86", /* cyan    */
+  [15] = "#2a3440", /* white   */
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+  /* special colors */
+  [256] = "#191c24", /* background */
+  [257] = "#495465", /* foreground */
+  [258] = "#f55050", /*   cursor   */
+  [259] = "#52849b", /* reversecC  */
 };
-
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
 unsigned int defaultbg = 256;
 unsigned int defaultfg = 257;
 unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 259;
+unsigned int defaultrcs = 259;
 
 /*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
  */
-static unsigned int cursorshape = 4;
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
+
+
+/*
+ * Default style of cursor
+ * 0: Blinking block
+ * 1: Blinking block (default)
+ * 2: Steady block ("█")
+ * 3: Blinking underline
+ * 4: Steady underline ("_")
+ * 5: Blinking bar
+ * 6: Steady bar ("|")
+ * 7: Blinking st cursor
+ * 8: Steady st cursor
+ */
+static unsigned int cursorshape = 3;
 
 /*
  * Default columns and rows numbers
@@ -208,8 +216,6 @@ ResourcePref resources[] = {
 		{ "cursorColor",  STRING,  &colorname[258] },
 		{ "termname",     STRING,  &termname },
 		{ "shell",        STRING,  &shell },
-		{ "minlatency",   INTEGER, &minlatency },
-		{ "maxlatency",   INTEGER, &maxlatency },
 		{ "blinktimeout", INTEGER, &blinktimeout },
 		{ "bellvolume",   INTEGER, &bellvolume },
 		{ "tabspaces",    INTEGER, &tabspaces },

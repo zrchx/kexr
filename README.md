@@ -10,29 +10,23 @@ HAHAHAHHA
 @ Push the updates 
 
 
-^ Finish edit the st.info
-
-
-
 
 ## Patches
 - Xresources (WORKING) *need improve*
 - BoxDraw (WORKING) *Wait for more pactches*
-- Glyph Wide (TESTING) * IS the ver with BoxDraw support
-this thing dont work so future testing a implementation require
+- Glyph Wide (WORKING) *Future testing*
 
 - Alpha (NOT)
-
 
 
 ## How This work
 i do not build in this folder clone the folder whitout
 .git and build there make the changes here a build there
 
-
 ## LOG
 first patch Xresources and fixes the problem whit background numbers
 then patch BoxDraw and edit config.def.h
 
+check the scrollback patch
 
-check the compile error and fix it is probably some miss puntation
+DO NOT BE IN THE COUCH MORE TIME

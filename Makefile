@@ -1,4 +1,4 @@
-# st - simple terminal
+# NS - Net Synth term
 # See LICENSE file for copyright and license details.
 .POSIX:
 
@@ -27,7 +27,7 @@ boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
-st: $(OBJ)
+ns: $(OBJ)
 	$(CC) -o ns $(OBJ) $(STLDFLAGS)
 
 clean:
@@ -41,7 +41,7 @@ dist: clean
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: st
+install: ns
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f ns $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/ns
@@ -50,8 +50,9 @@ install: st
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/ns.1
 	mkdir -p $(DESTDIR)$(PREFIX)/share/terminfo
 	tic -o $(DESTDIR)$(PREFIX)/share/terminfo -sx st.info
+	cp Xresources ~/.Xresources
 
-locali: st
+locali: ns
 	mkdir -p $(LOCALDIR)/bin
 	cp -f ns $(LOCALDIR)/bin
 	chmod 755 $(LOCALDIR)/bin/ns
@@ -60,6 +61,7 @@ locali: st
 	chmod 644 $(LOCALDIR)/man1/ns.1
 	mkdir -p $(PREFIXLOCAL)/terminfo
 	tic -o $(PREFIXLOCAL)/terminfo -sx st.info
+	cp Xresources ~/.Xresources
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/ns
