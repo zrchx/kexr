@@ -70,13 +70,13 @@ locali: ns
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/ns
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/ns.1
-	rm -f $(DESTDIR)$(PREFIX)/share/terminfo
-	rm -f $(DESTDIR)$(APP)
+	rm -f $(DESTDIR)$(PREFIX)/share/terminfo/x/*
+	rm -f $(DESTDIR)$(APP)/ns.desktop
 
 localu:
-	rm -f $(LOCALDIR)/bin
-	rm -f $(LOCALDIR)/man1
-	rm -f $(PREFIXLOCAL)/terminfo
-	rm -f $(LOCALAPP)
+	rm -rf $(LOCALDIR)/bin
+	rm -rf $(LOCALDIR)/man1
+	rm -rf $(PREFIXLOCAL)/terminfo
+	rm -rf $(LOCALAPP)
 
 .PHONY: all options clean dist install uninstall
