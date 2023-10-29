@@ -1,4 +1,5 @@
 /* See LICENSE for license details. */
+#include <X11/X.h>
 #include <errno.h>
 #include <math.h>
 #include <limits.h>
@@ -117,6 +118,11 @@ typedef struct {
 	Draw draw;
 	Visual *vis;
 	XSetWindowAttributes attrs;
+  /* Here, we use the term pointer to differentiate the cursor
+   * one sees when hovering the mouse over the terminal fror, e.g.,
+   * a green rectangle where text would be entered */
+  Cursor vpointer, bpointer;
+  int pointerisvisible;
 	int scr;
 	int isfixed; /* is fixed geometry? */
 	int l, t; /* left and top offset */
@@ -267,6 +273,7 @@ static char *opt_name  = NULL;
 static char *opt_title = NULL;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
+static int cursorblinks = 0;
 
 void
 clipcopy(const Arg *dummy)
@@ -714,6 +721,12 @@ brelease(XEvent *e)
 void
 bmotion(XEvent *e)
 {
+  if (!xw.pointerisvisible) {
+    XDefineCursor(xw.dpy, xw.win, xw.vpointer);
+    xw.pointerisvisible = 1;
+    if (!IS_SET(MODE_MOUSEMANY)) 
+      xsetpointermotion(0);
+  }
 	if (IS_SET(MODE_MOUSE) && !(e->xbutton.state & forcemousemod)) {
 		mousereport(e);
 		return;
@@ -1128,10 +1141,10 @@ void
 xinit(int cols, int rows)
 {
 	XGCValues gcvalues;
-	Cursor cursor;
 	Window parent;
 	pid_t thispid = getpid();
 	XColor xmousefg, xmousebg;
+  Pixmap blankpm;
 
 	xw.scr = XDefaultScreen(xw.dpy);
 	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
@@ -1193,8 +1206,9 @@ xinit(int cols, int rows)
 	}
 
 	/* white cursor, black outline */
-	cursor = XCreateFontCursor(xw.dpy, mouseshape);
-	XDefineCursor(xw.dpy, xw.win, cursor);
+  xw.pointerisvisible = 1;
+  xw.vpointer = XCreateFontCursor(xw.dpy, mouseshape);
+	XDefineCursor(xw.dpy, xw.win, xw.vpointer);
 
 	if (XParseColor(xw.dpy, xw.cmap, colorname[mousefg], &xmousefg) == 0) {
 		xmousefg.red   = 0xffff;
@@ -1208,7 +1222,10 @@ xinit(int cols, int rows)
 		xmousebg.blue  = 0x0000;
 	}
 
-	XRecolorCursor(xw.dpy, cursor, &xmousefg, &xmousebg);
+	XRecolorCursor(xw.dpy, xw.vpointer, &xmousefg, &xmousebg);
+  blankpm = XCreateBitmapFromData(xw.dpy, xw.win, &(char){0}, 1, 1);
+  xw.bpointer = XCreatePixmapCursor(xw.dpy, blankpm, blankpm, 
+                                    &xmousefg, &xmousebg, 0, 0);
 
 	xw.xembed = XInternAtom(xw.dpy, "_XEMBED", False);
 	xw.wmdeletewin = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
@@ -1560,29 +1577,43 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og, Line line, int le
 	/* draw the new one */
 	if (IS_SET(MODE_FOCUSED)) {
 		switch (win.cursor) {
-		case 7: /* st extension */
-			g.u = 0x2603; /* snowman (U+2603) */
-			/* FALLTHROUGH */
-		case 0: /* Blinking Block */
+    default:
+    case 0: /* Blinking Block */
 		case 1: /* Blinking Block (Default) */
+      if (IS_SET(MODE_BLINK))
+        break;
+      /* Fallthrough */
 		case 2: /* Steady Block */
-			xdrawglyph(g, cx, cy);
+      xdrawglyph(g, cx, cy);
 			break;
 		case 3: /* Blinking Underline */
-		case 4: /* Steady Underline */
-			XftDrawRect(xw.draw, &drawcol,
-					borderpx + cx * win.cw,
-					borderpx + (cy + 1) * win.ch - \
-						cursorthickness,
-					win.cw, cursorthickness);
-			break;
-		case 5: /* Blinking bar */
-		case 6: /* Steady bar */
-			XftDrawRect(xw.draw, &drawcol,
-					borderpx + cx * win.cw,
-					borderpx + cy * win.ch,
-					cursorthickness, win.ch);
-			break;
+      if (IS_SET(MODE_BLINK))
+        break;
+      /* Fallthrough */
+    case 4: /* Steady Underline */
+      XftDrawRect(xw.draw, &drawcol,
+        borderpx + cx * win.cw, 
+        borderpx + (cy + 1) * win.ch - \
+        cursorthickness, win.cw, cursorthickness);
+      break;
+    case 5: /* Blinking Bar */
+      if (IS_SET(MODE_BLINK))
+        break;
+      /* Fallthrough */
+    case 6: /* Steady Bar */
+      XftDrawRect(xw.draw, &drawcol, 
+        borderpx + cx * win.cw, 
+        borderpx + cy * win.ch, 
+        cursorthickness, win.ch);
+      break;
+    case 7: /* Blinking st cursor */
+      if (IS_SET(MODE_BLINK))
+        break;
+      /* Fallthrough */
+    case 8: /* Steady st cursor */
+      g.u = 0x2603;
+      xdrawglyph(g, cx, cy);
+      break;
 		}
 	} else {
 		XftDrawRect(xw.draw, &drawcol,
@@ -1730,6 +1761,8 @@ unmap(XEvent *ev)
 void
 xsetpointermotion(int set)
 {
+  if (!set && !xw.pointerisvisible)
+    return;
 	MODBIT(xw.attrs.event_mask, set, PointerMotionMask);
 	XChangeWindowAttributes(xw.dpy, xw.win, CWEventMask, &xw.attrs);
 }
@@ -1746,9 +1779,12 @@ xsetmode(int set, unsigned int flags)
 int
 xsetcursor(int cursor)
 {
-	if (!BETWEEN(cursor, 0, 7)) /* 7: st extension */
+	if (!BETWEEN(cursor, 0, 8)) /* 7-8: st extensions */
 		return 1;
 	win.cursor = cursor;
+  cursorblinks = win.cursor == 0 || win.cursor == 1 ||
+                 win.cursor == 3 || win.cursor == 5 ||
+                 win.cursor == 7;
 	return 0;
 }
 
@@ -1848,6 +1884,12 @@ kpress(XEvent *ev)
 	Rune c;
 	Status status;
 	Shortcut *bp;
+
+  if (xw.pointerisvisible) {
+    XDefineCursor(xw.dpy, xw.win, xw.bpointer);
+    xsetpointermotion(1);
+    xw.pointerisvisible = 0;
+  }
 
 	if (IS_SET(MODE_KBDLOCK))
 		return;
@@ -1992,6 +2034,10 @@ run(void)
 		if (FD_ISSET(ttyfd, &rfd) || xev) {
 			if (!drawing) {
 				trigger = now;
+        if (IS_SET(MODE_BLINK)) {
+          win.mode ^= MODE_BLINK;
+        }
+        lastblink = now;
 				drawing = 1;
 			}
 			timeout = (maxlatency - TIMEDIFF(now, trigger)) \
@@ -2002,7 +2048,7 @@ run(void)
 
 		/* idle detected or maxlatency exhausted -> draw */
 		timeout = -1;
-		if (blinktimeout && tattrset(ATTR_BLINK)) {
+		if (blinktimeout && (cursorblinks || tattrset(ATTR_BLINK))) {
 			timeout = blinktimeout - TIMEDIFF(now, lastblink);
 			if (timeout <= 0) {
 				if (-timeout > blinktimeout) /* start visible */
@@ -2091,7 +2137,7 @@ main(int argc, char *argv[])
 {
 	xw.l = xw.t = 0;
 	xw.isfixed = False;
-	xsetcursor(cursorshape);
+	xsetcursor(cursorstyle);
 
 	ARGBEGIN {
 	case 'a':

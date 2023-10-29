@@ -76,10 +76,8 @@ static unsigned int cursorthickness = 2;
  */
 const int boxdraw = 1;
 const int boxdraw_bold = 0;
-
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
 const int boxdraw_braille = 0;
-
 
 /* default TERM value */
 char *termname = "ns-256color";
@@ -103,29 +101,29 @@ unsigned int tabspaces = 2;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  /* 8 normal colors */
-  [0] = "#393f4c", /* black   */
-  [1] = "#f13b3b", /* red     */
-  [2] = "#52849b", /* green   */
-  [3] = "#f55050", /* yellow  */
-  [4] = "#f13b3b", /* blue    */
-  [5] = "#306b86", /* magenta */
-  [6] = "#306b86", /* cyan    */
-  [7] = "#2a3440", /* white   */
+ /* 8 normal colors */
+  [0] = "#212733", /* black   */
+  [1] = "#d54444", /* red     */
+  [2] = "#529698", /* green   */
+  [3] = "#d54444", /* yellow  */
+  [4] = "#d54444", /* blue    */
+  [5] = "#529698", /* magenta */
+  [6] = "#529698", /* cyan    */
+  [7] = "#2e394d", /* white   */
   /* 8 bright colors */
-  [8]  = "#393f4c", /* black   */
-  [9]  = "#f13b3b", /* red     */
-  [10] = "#52849b", /* green   */
-  [11] = "#f55050", /* yellow  */
-  [12] = "#f13b3b", /* blue    */
-  [13] = "#306b86", /* magenta */
-  [14] = "#306b86", /* cyan    */
-  [15] = "#2a3440", /* white   */
+  [8]  = "#212733", /* black   */
+  [9]  = "#d54444", /* red     */
+  [10] = "#529698", /* green   */
+  [11] = "#d54444", /* yellow  */
+  [12] = "#d54444", /* blue    */
+  [13] = "#529698", /* magenta */
+  [14] = "#529698", /* cyan    */
+  [15] = "#2e394d", /* white   */
   /* special colors */
-  [256] = "#191c24", /* background */
-  [257] = "#495465", /* foreground */
-  [258] = "#f55050", /*   cursor   */
-  [259] = "#52849b", /* reversecC  */
+  [256] = "#1a1c23", /* background */
+  [257] = "#435265", /* foreground */
+  [258] = "#d54444", /*   cursor   */
+  [259] = "#529698", /* reversecC  */
 };
 
 /*
@@ -136,7 +134,6 @@ unsigned int defaultbg = 256;
 unsigned int defaultfg = 257;
 unsigned int defaultcs = 258;
 unsigned int defaultrcs = 259;
-
 
 /*
  * Default style of cursor
@@ -150,7 +147,7 @@ unsigned int defaultrcs = 259;
  * 7: Blinking st cursor
  * 8: Steady st cursor
  */
-static unsigned int cursorshape = 3;
+static unsigned int cursorstyle = 3;
 
 /*
  * Default columns and rows numbers
@@ -203,10 +200,8 @@ ResourcePref resources[] = {
 		{ "background",   STRING,  &colorname[256] },
 		{ "foreground",   STRING,  &colorname[257] },
 		{ "cursorColor",  STRING,  &colorname[258] },
-		{ "termname",     STRING,  &termname },
-		{ "shell",        STRING,  &shell },
+    { "rCursor" ,    STRING,  &colorname[259]},
 		{ "blinktimeout", INTEGER, &blinktimeout },
-		{ "bellvolume",   INTEGER, &bellvolume },
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
 		{ "cwscale",      FLOAT,   &cwscale },
@@ -220,10 +215,10 @@ ResourcePref resources[] = {
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+  { XK_ANY_MOD,           Button4, kscrollup,      {.i = 3} },
+  { XK_ANY_MOD,           Button5, kscrolldown,    {.i = 3} },
+  { XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+ 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\005"} },
 };
 
 /* Internal keyboard shortcuts. */

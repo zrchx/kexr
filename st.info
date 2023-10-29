@@ -228,7 +228,7 @@ ns-meta-256color| NetSynth with meta key and 256 colors,
 	rs2=\E[4l\E>\E[?1034h,
 	is2=\E[4l\E>\E[?1034h,
 
-st-bs| simpleterm with backspace as backspace,
+ns-bs| NetSynth whit backspace as backspace,
 	use=ns,
 	kbs=\010,
 	kdch1=\177,
