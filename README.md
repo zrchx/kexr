@@ -11,7 +11,7 @@ HAHAHAHHA
 - Xresources (WORKING) *need improve*
 - BoxDraw (WORKING) *Wait for more pactches*
 - Glyph Wide (WORKING) *Future testing*
-- Scroll back (Working) *Tested*
+- Scroll back (Working) *Error sometimes when scrollback blank the screen*
 - Vanish mouse (Working) *Tested*
 - Blinking Cursor (Working) *Tested*
 
