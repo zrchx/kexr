@@ -36,3 +36,5 @@ to remove run \
 - Finish to config the Xresources files (HALF OF WORK TO DO)
 - Check the icons for the desk file
 - Finish to config the base terminal
+- Terminal bad win id
+- Close whit click the window
