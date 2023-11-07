@@ -2,6 +2,9 @@
 
 /* Font */
 static char *font = "Ncrx:pixelsize=13:antialias=true:autohint=true";
+static char *font2[] = {
+  "JetBrainsMonoNL Nerd Font:pixelsize=12:antialias=true:autohint=true"
+};
 /* Misc */
 static int bellvolume = 0;
 static int borderpx = 0;
@@ -16,8 +19,6 @@ static int borderpx = 0;
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
-
-
 
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
@@ -54,8 +55,9 @@ int allowwindowops = 0;
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
  */
-static double minlatency = 8;
-static double maxlatency = 33;
+static double minlatency = 20;
+static double maxlatency = 30;
+static uint su_timeout = 200;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
@@ -214,8 +216,8 @@ ResourcePref resources[] = {
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-  { XK_ANY_MOD,           Button4, kscrollup,      {.i = 2} },
-  { XK_ANY_MOD,           Button5, kscrolldown,    {.i = 2} },
+  { XK_ANY_MOD,           Button4, kscrollup,      {.i = 2}, 0},
+  { XK_ANY_MOD,           Button5, kscrolldown,    {.i = 2}, 0},
   { ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
   { XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 };
@@ -505,3 +507,27 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
+
+/**
+ * Undercurl style. Set UNDERCURL_STYLE to one of the available styles.
+ *
+ * Curly: Dunno how to draw it *shrug*
+ *  _   _   _   _
+ * ( ) ( ) ( ) ( )
+ *	 (_) (_) (_) (_)
+ *
+ * Spiky:
+ * /\  /\   /\	/\
+ *   \/  \/	  \/
+ *
+ * Capped:
+ *	_     _     _
+ * / \   / \   / \
+ *    \_/   \_/
+ */
+// Available styles
+#define UNDERCURL_CURLY 0
+#define UNDERCURL_SPIKY 1
+#define UNDERCURL_CAPPED 2
+// Active style
+#define UNDERCURL_STYLE UNDERCURL_CAPPED
