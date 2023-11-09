@@ -33,14 +33,6 @@ ns: $(OBJ)
 clean:
 	rm -f ns config.h $(OBJ) st-$(VERSION).tar.gz
 
-dist: clean
-	mkdir -p st-$(VERSION)
-	cp -R Makefile config.mk config.def.h\
-		st.info st.1 arg.h st.h win.h $(SRC)\
-		st-$(VERSION)
-	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
-	rm -rf st-$(VERSION)
-
 install: ns
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f ns $(DESTDIR)$(PREFIX)/bin
@@ -79,4 +71,4 @@ localu:
 	rm -rf $(PREFIXLOCAL)/terminfo
 	rm -rf $(LOCALAPP)
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all options clean install uninstall locali localu
