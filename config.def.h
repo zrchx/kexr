@@ -2,9 +2,7 @@
 
 /* Font */
 static char *font = "Ncrx:pixelsize=13:antialias=true:autohint=true";
-static char *font2[] = {
-  "JetBrainsMonoNL Nerd Font:pixelsize=12:antialias=true:autohint=true"
-};
+static char *font2[] = { "JetBrainsMonoNL Nerd Font:pixelsize=12:antialias=true:autohint=true" };
 /* Misc */
 static int bellvolume = 0;
 static int borderpx = 0;
@@ -63,7 +61,7 @@ static uint su_timeout = 200;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 400;
 
 /*
  * thickness of underline and bar cursors
@@ -103,29 +101,29 @@ unsigned int tabspaces = 2;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
- /* 8 normal colors */
-  [0] = "#212733", /* black   */
-  [1] = "#d54444", /* red     */
-  [2] = "#529698", /* green   */
-  [3] = "#d54444", /* yellow  */
-  [4] = "#d54444", /* blue    */
-  [5] = "#529698", /* magenta */
-  [6] = "#529698", /* cyan    */
-  [7] = "#2e394d", /* white   */
+  /* 8 normal colors */
+  [0] = "#1d1f21", /* black   */
+  [1] = "#cc6666", /* red     */
+  [2] = "#b5bd68", /* green   */
+  [3] = "#f0c674", /* yellow  */
+  [4] = "#81a2be", /* blue    */
+  [5] = "#b294bb", /* magenta */
+  [6] = "#8abeb7", /* cyan    */
+  [7] = "#c5c8c6", /* white   */
   /* 8 bright colors */
-  [8]  = "#212733", /* black   */
-  [9]  = "#d54444", /* red     */
-  [10] = "#529698", /* green   */
-  [11] = "#d54444", /* yellow  */
-  [12] = "#d54444", /* blue    */
-  [13] = "#529698", /* magenta */
-  [14] = "#529698", /* cyan    */
-  [15] = "#2e394d", /* white   */
+  [8]  = "#969896", /* black   */
+  [9]  = "#cc6666", /* red     */
+  [10] = "#b5bd68", /* green   */
+  [11] = "#f0c674", /* yellow  */
+  [12] = "#81a2be", /* blue    */
+  [13] = "#b294bb", /* magenta */
+  [14] = "#8abeb7", /* cyan    */
+  [15] = "#ffffff", /* white   */
   /* special colors */
-  [256] = "#1a1c23", /* background */
-  [257] = "#435265", /* foreground */
-  [258] = "#d54444", /*   cursor   */
-  [259] = "#529698", /* reversecC  */
+  [256] = "#1d1f21", /* background */
+  [257] = "#c2c8c6", /* foreground */
+  [258] = "#c2c8c6", /*   cursor   */
+  [259] = "#1d1f21", /* reversecC  */
 };
 
 /*
@@ -202,7 +200,7 @@ ResourcePref resources[] = {
 		{ "background",   STRING,  &colorname[256] },
 		{ "foreground",   STRING,  &colorname[257] },
 		{ "cursorColor",  STRING,  &colorname[258] },
-    { "rCursor" ,    STRING,  &colorname[259]},
+    { "rCursor" ,     STRING,  &colorname[259]},
 		{ "blinktimeout", INTEGER, &blinktimeout },
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
@@ -530,4 +528,4 @@ static char ascii_printable[] =
 #define UNDERCURL_SPIKY 1
 #define UNDERCURL_CAPPED 2
 // Active style
-#define UNDERCURL_STYLE UNDERCURL_CAPPED
+#define UNDERCURL_STYLE UNDERCURL_CURLY

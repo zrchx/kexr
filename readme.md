@@ -52,3 +52,5 @@ to remove run \
 ## TODO
 - Check the icons for the desk file
 - Terminal bad win id
+- error whit the cursor do not change in the neovim window
+- fix some keyboard bad reads

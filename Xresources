@@ -1,11 +1,10 @@
 ! NetSynth Settings !
-st.font:         Ncrx Nerd Font:Regular:pixelsize=13
-st.bold_font:    Ncrx:Bold:pixelsize=13
+st.font:         JetBrainsMonoNL NF:style=Regular:Pixelsize=13
 
 ! window padding
 st.borderpx:     20
 st.tabspaces:    2
-st.blinktimeout: 200
+st.blinktimeout: 400
 
 !- 0.1 to 0.9 = transparency
 !st.alpha:        0.9
