@@ -7,13 +7,7 @@ include config.mk
 SRC = st.c x.c boxdraw.c
 OBJ = $(SRC:.c=.o)
 
-all: options st
-
-options:
-	@echo st build options:
-	@echo "CFLAGS  = $(STCFLAGS)"
-	@echo "LDFLAGS = $(STLDFLAGS)"
-	@echo "CC      = $(CC)"
+all: st
 
 config.h:
 	cp config.def.h config.h
@@ -28,10 +22,10 @@ boxdraw.o: config.h st.h boxdraw_data.h
 $(OBJ): config.h config.mk
 
 ns: $(OBJ)
-	$(CC) -o ns $(OBJ) $(STLDFLAGS)
+	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f ns config.h $(OBJ) st-$(VERSION).tar.gz
+	rm -f ns $(OBJ) st-$(VERSION).tar.gz
 
 install: ns
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
@@ -71,4 +65,4 @@ localu:
 	rm -rf $(PREFIXLOCAL)/terminfo
 	rm -rf $(LOCALAPP)
 
-.PHONY: all options clean install uninstall locali localu
+.PHONY: all clean install uninstall locali localu

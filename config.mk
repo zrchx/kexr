@@ -1,5 +1,5 @@
 # NS version
-VERSION = 0.8.5
+VERSION = 0.1
 
 # Customize below to fit your system
 
@@ -32,4 +32,4 @@ STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 
 # compiler and linker
-# CC = c99
+CC = c99
