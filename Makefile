@@ -25,7 +25,15 @@ ns: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f ns $(OBJ) st-$(VERSION).tar.gz
+	rm -f ns $(OBJ) ns-$(VERSION).tar.gz
+
+release:
+	mkdir -p ns-$(VERSION)
+	cp -R ns config.mk arg.h st.h st.1 st.info win.h readme.md\
+		Makefile config.def.h boxdraw_data.h $(SRC) ns.desktop\
+		ns-$(VERSION)
+	tar -cf - ns-$(VERSION) | gzip > ns-$(VERSION).tar.gz
+	rm -rf ns-$(VERSION)
 
 install: ns
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
@@ -65,4 +73,4 @@ localu:
 	rm -rf $(PREFIXLOCAL)/terminfo
 	rm -rf $(LOCALAPP)
 
-.PHONY: all clean install uninstall locali localu
+.PHONY: all release clean install uninstall locali localu

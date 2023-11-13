@@ -1,5 +1,6 @@
 config.h
 ns
+ns-*.tar.gz
 *.o
 *.rej
 *.orig
