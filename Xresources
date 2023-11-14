@@ -6,42 +6,40 @@ st.borderpx:     20
 st.tabspaces:    2
 st.blinktimeout: 400
 
-!- 0.1 to 0.9 = transparency
-!st.alpha:        0.9
-
 ! special
-st.foreground:   #323f49
-st.background:   #1a1f23
-st.cursorColor:  #323f49
+st.foreground:   #4d4d4d
+st.background:   #1F1F1F
+st.cursorColor:  #4d4d4d
+st.rCursor:      #1F1F1F
 
 ! black
-st.color0:       #283239
-st.color8:       #283239
+st.color0:       #383838
+st.color8:       #383838
 
 ! red
-st.color1:       #435460
-st.color9:       #435460
+st.color1:       #a17d7d
+st.color9:       #a17d7d
 
 ! green
-st.color2:       #313c44
-st.color10:      #313c44
+st.color2:       #93a68c
+st.color10:      #93a68c
 
 ! yellow
-st.color3:       #435460
-st.color11:      #435460
+st.color3:       #a38b7b
+st.color11:      #a38b7b
 
 ! blue
-st.color4:       #313c44
-st.color12:      #313c44
+st.color4:       #798f96
+st.color12:      #798f96
 
 ! magenta
-st.color5:       #435460
-st.color13:      #435460
+st.color5:       #897d8c
+st.color13:      #897d8c
 
 ! cyan
-st.color6:       #719da2
-st.color14:      #719da2
+st.color6:       #819c9a
+st.color14:      #819c9a
 
 ! white
-st.color7:       #566976
-st.color15:      #566976
+st.color7:       #5c5c5c
+st.color15:      #5c5c5c
