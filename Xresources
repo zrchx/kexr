@@ -1,45 +1,46 @@
 ! NetSynth Settings !
-st.font:         JetBrainsMonoNL NF:style=Regular:Pixelsize=13
+ns.font:        JetBrainsMonoNL Nerd Font:style=Regular:Pixelsize=12.5
+ns.font_bold:   JetBrainsMonoNL Nerd Font:style=Bold:Pixelsize=12.5
 
 ! window padding
-st.borderpx:     20
-st.tabspaces:    2
-st.blinktimeout: 400
+ns.borderpx:     20
+ns.tabspaces:    2
+ns.blinktimeout: 400
 
 ! special
-st.foreground:   #4d4d4d
-st.background:   #1F1F1F
-st.cursorColor:  #4d4d4d
-st.rCursor:      #1F1F1F
+ns.foreground:   #4d4d4d
+ns.background:   #1F1F1F
+ns.cursorColor:  #4d4d4d
+ns.rCursor:      #1F1F1F
 
 ! black
-st.color0:       #383838
-st.color8:       #383838
+ns.color0:       #383838
+ns.color8:       #383838
 
 ! red
-st.color1:       #a17d7d
-st.color9:       #a17d7d
+ns.color1:       #a17d7d
+ns.color9:       #a17d7d
 
 ! green
-st.color2:       #93a68c
-st.color10:      #93a68c
+ns.color2:       #93a68c
+ns.color10:      #93a68c
 
 ! yellow
-st.color3:       #a38b7b
-st.color11:      #a38b7b
+ns.color3:       #a38b7b
+ns.color11:      #a38b7b
 
 ! blue
-st.color4:       #798f96
-st.color12:      #798f96
+ns.color4:       #798f96
+ns.color12:      #798f96
 
 ! magenta
-st.color5:       #897d8c
-st.color13:      #897d8c
+ns.color5:       #897d8c
+ns.color13:      #897d8c
 
 ! cyan
-st.color6:       #819c9a
-st.color14:      #819c9a
+ns.color6:       #819c9a
+ns.color14:      #819c9a
 
 ! white
-st.color7:       #5c5c5c
-st.color15:      #5c5c5c
+ns.color7:       #5c5c5c
+ns.color15:      #5c5c5c
