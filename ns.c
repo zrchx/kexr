@@ -19,7 +19,7 @@
 #include <wchar.h>
 #include <time.h>
 
-#include "st.h"
+#include "ns.h"
 #include "win.h"
 
 #if   defined(__linux)
@@ -1795,6 +1795,10 @@ tsetmode(int priv, int set, const int *args, int narg)
 				xsetmode(set, MODE_8BIT);
 				break;
 			case 1049: /* swap screen & set/restore cursor as xterm */
+        if (!allowaltscreen)
+          break;
+          tcursor((set) ? CURSOR_SAVE : CURSOR_LOAD);
+        /* FALLTHROUGH */
 			case 47: /* swap screen */
 			case 1047: /* swap screen clearing alternate screen */
 				if (!allowaltscreen)
@@ -2176,6 +2180,7 @@ strhandle(void)
 {
 	char *p = NULL, *dec;
 	int j, narg, par;
+  static int winname = 0;
 
 	term.esc &= ~(ESC_STR_END|ESC_STR);
 	strparse();
@@ -2264,10 +2269,8 @@ strhandle(void)
 				fprintf(stderr, "erresc: invalid color j=%d, p=%s\n",
 				        j, p ? p : "(null)");
 			} else {
-				/*
-				 * TODO if defaultbg color is changed, borders
-				 * are dirty
-				 */
+				if (j == defaultbg)
+			    xclearwin();
 				redraw();
 			}
 			return;
